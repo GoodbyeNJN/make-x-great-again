@@ -1,6 +1,8 @@
 import tailwindcss from "@tailwindcss/vite";
 import { defineConfig } from "wxt";
 
+const FIREFOX_EXTENSION_ID = "mxga@zuoluo.tv";
+
 // Make X Great Again (MXGA) — strictly passive. Only the Worker host
 // permission for our own API; X DOM is read via the content-script match.
 //
@@ -14,7 +16,7 @@ export default defineConfig({
   // .output/chrome-mv3 into your own Chrome (logged into X) manually;
   // WXT still watches + hot-reloads it.
   webExt: { disabled: true },
-  manifest: ({ mode }) => ({
+  manifest: ({ mode, browser }) => ({
     // Brand-forward name. CWS_LISTING.md keeps the fallback copy in case the
     // listing needs a more neutral store-facing title.
     name: "Make X Great Again",
@@ -61,5 +63,17 @@ export default defineConfig({
     ],
     action: { default_title: "MXGA" },
     options_ui: { open_in_tab: true },
+    ...(browser === "firefox"
+      ? {
+          browser_specific_settings: {
+            gecko: {
+              id: FIREFOX_EXTENSION_ID,
+              data_collection_permissions: {
+                required: ["none"],
+              },
+            },
+          },
+        }
+      : {}),
   }),
 });

@@ -1,6 +1,6 @@
 # Architecture — Cloudflare-native public service
 
-Architecture notes for MXGA — the Chrome extension + Cloudflare service
+Architecture notes for MXGA — the browser extension + Cloudflare service
 that ships the public spam-shield. Read alongside [GOVERNANCE.md](../GOVERNANCE.md)
 for the policy contract this implementation must satisfy.
 
@@ -8,7 +8,7 @@ for the policy contract this implementation must satisfy.
 
 A public-good, semi-open, crowdsourced anti-spam system for X (Twitter):
 
-- Anyone installs the **Chrome extension**, browses X normally, and is
+- Anyone installs the **browser extension** (Chrome / Firefox), browses X normally, and is
   passively warned about spam / porn-ad bots on the current page.
 - One-click **block** (user-initiated, never silently automatic) and one-click
   **report**.
@@ -37,7 +37,7 @@ Cloudflare R2/CDN has **zero egress fees**.
 
 ```
                 ┌─────────────────────────────────────────────┐
-                │  Browser extension (MV3, passive)            │
+                │  Browser extension (Chrome MV3 / Firefox MV2) │
    you browse X │  • read visible accounts (no scraping)       │
   ───────────►  │  • local heuristic prefilter                 │
                 │  • LOCAL bloom check (artifact from CDN)      │

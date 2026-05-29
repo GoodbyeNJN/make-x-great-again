@@ -8,7 +8,7 @@
 
 <p align="center">
   <b>少看垃圾，多看人话。</b><br>
-  你照常刷 X，AI 在后台把广告号和色情 bot 挑出来 · Chrome 扩展 · AGPL-3.0 开源
+  你照常刷 X，AI 在后台把广告号和色情 bot 挑出来 · Chrome / Firefox 扩展 · AGPL-3.0 开源
 </p>
 
 <p align="center">
@@ -22,6 +22,7 @@
 
 <p align="center">
   <a href="https://chromewebstore.google.com/detail/make-x-great-again/aeoldnecphbkkckeedfgfcdcekkljdea">🟦 从 Chrome 商店安装</a> ·
+  <a href="https://github.com/foru17/make-x-great-again/releases/latest">🦊 Firefox / 开发版下载</a> ·
   <a href="https://x.zuoluo.tv">🌐 官网门户</a> ·
   <a href="https://x.zuoluo.tv/list">📋 公共名单</a> ·
   <a href="https://github.com/foru17/make-x-great-again/releases/latest">📦 GitHub Release</a> ·
@@ -72,20 +73,29 @@ X 现在的问题，大家都知道：
 
 ### 普通用户
 
-**推荐**：直接从 Chrome Web Store 安装。
+**Chrome 用户推荐**：直接从 Chrome Web Store 安装。
 
 👉 [chromewebstore.google.com/detail/make-x-great-again/aeoldnecphbkkckeedfgfcdcekkljdea](https://chromewebstore.google.com/detail/make-x-great-again/aeoldnecphbkkckeedfgfcdcekkljdea)
+
+Firefox / Edge / Brave / Arc 用户可直接使用 GitHub Release 里的构建产物。
 
 装好后，访问 x.com 扩展会自动开始工作。
 
 <details>
-<summary>用 Edge / Brave / Arc，或想跑开发版？</summary>
+<summary>用 Firefox / Edge / Brave / Arc，或想跑开发版？</summary>
 
 ```bash
+# Chromium 系浏览器：
 # 1. 从 https://github.com/foru17/make-x-great-again/releases/latest 下载最新 .zip 并解压
 # 2. chrome://extensions → 开启「开发者模式」
 # 3. 「加载已解压的扩展程序」→ 选择解压目录
-# 4. 访问 x.com，扩展自动开始工作
+#
+# Firefox：
+# 1. 从同一个 Release 下载 firefox 包，或本地执行 `npm run build:firefox`
+# 2. about:debugging#/runtime/this-firefox → “Load Temporary Add-on”
+# 3. 选择 extension/.output/firefox-mv2/manifest.json
+#
+# 然后访问 x.com，扩展自动开始工作
 ```
 
 </details>
@@ -101,7 +111,12 @@ pnpm typecheck && pnpm test && pnpm lint
 
 # 2. 扩展（WXT + React 19 + Tailwind v4）
 cd extension
-pnpm dev         # 监听 + 自动重载，把 .output/chrome-mv3 加进 Chrome 即可
+pnpm dev         # Chrome 开发
+pnpm dev:firefox # Firefox 开发
+pnpm build       # Chrome 产物
+pnpm build:firefox
+pnpm zip         # Chrome zip
+pnpm zip:firefox # Firefox zip
 
 # 3. 边缘服务（Cloudflare Worker + D1 + Hono）
 cd services/edge
@@ -132,7 +147,7 @@ npx wrangler secret put ADMIN_TOKEN      # /admin 网关
 
 ```
 src/                  本地 LLM 分类 CLI + node:test 单测（开发用，非生产路径）
-extension/            MV3 浏览器扩展：WXT + React 19 + Tailwind v4
+extension/            跨浏览器扩展：WXT + React 19 + Tailwind v4（Chrome MV3 / Firefox MV2）
   entrypoints/
     content.ts        X DOM 的被动观察 + 气泡 UI + 一键拉黑
     background.ts     全部 fetch / GitHub OAuth / 白名单同步发生在这
@@ -176,7 +191,7 @@ CONTRIBUTING.md       贡献指南
 - GraphQL 身份解析硬化、viewer-scoped 过滤、公榜命中自动拉黑（默认关）、浅色主题、批量勾选 UI、`escHtml` 加固
 
 **v0.2.0**（首发，2026-05-25）
-- 浏览器扩展（Chrome MV3）— 被动 AI 识别 + 一键真拉黑
+- 浏览器扩展（Chrome + Firefox）— 被动 AI 识别 + 一键真拉黑
 - 公开服务端 — `x.zuoluo.tv` / `/list` 公榜 / `/admin` 审核台
 - 维护者白名单 + 黑名单的 6h 自动同步到仓库 [`data/`](./data) 目录
 - 公榜每条带 `evidence_text`（触发推文片段）+ `reasons`（AI 给出的理由）+ `reporters`（独立举报人数）
