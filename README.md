@@ -22,7 +22,7 @@
 
 <p align="center">
   <a href="https://chromewebstore.google.com/detail/make-x-great-again/aeoldnecphbkkckeedfgfcdcekkljdea">🟦 从 Chrome 商店安装</a> ·
-  <a href="https://github.com/foru17/make-x-great-again/releases/latest">🦊 Firefox / 开发版下载</a> ·
+  <a href="https://github.com/foru17/make-x-great-again/releases/latest">🦊 Firefox 手动安装包</a> ·
   <a href="https://x.zuoluo.tv">🌐 官网门户</a> ·
   <a href="https://x.zuoluo.tv/list">📋 公共名单</a> ·
   <a href="https://github.com/foru17/make-x-great-again/releases/latest">📦 GitHub Release</a> ·
